@@ -1,0 +1,2 @@
+# coding
+practise for leetcode 
