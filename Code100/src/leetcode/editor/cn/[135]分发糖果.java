@@ -43,7 +43,35 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int candy(int[] ratings) {
+        int[] left = new int[ratings.length];
+        int right = 0;
+        left[0] = 1;
+        int sum = 0;
+        for(int i = 1;i<ratings.length;i++)
+        {
+            if(ratings[i-1]<ratings[i])
+            {
+                left[i] = 1+left[i-1];
+            }else
+            {
+                left[i] = 1;
+            }
+        }
+        sum+= left[ratings.length-1];
 
+        for(int i=ratings.length-1;i>=1;i--)
+        {
+            if(ratings[i-1]>ratings[i])
+            {
+                right = left[i]+1;
+            }else
+            {
+                right = 1;
+            }
+            left[i-1] = left[i-1]<right? right:left[i-1];
+            sum+=left[i-1];
+        }
+        return sum;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
